@@ -1,0 +1,39 @@
+# Default values for zookeeper.
+# This is a YAML-formatted file.
+# Declare name/value pairs to be passed into your templates.
+# name: value
+servers: 3
+minAvailable: 2
+resources:
+  requests:
+    cpu: 500m
+    memory: 8Gi
+  limits:
+    cpu: 2
+    memory: 8Gi
+heap: "4G"
+storage: "10Gi"
+# storageClass: default
+serverPort: 2888
+leaderElectionPort: 3888
+clientPort: 2181
+imagePullPolicy: "Always"
+tickTimeMs: 2000
+initTicks: 10
+syncTicks: 5
+clientCnxns: 60
+snapRetain: 3
+purgeHours: 1
+probeInitialDelaySeconds: 15
+probeTimeoutSeconds: 5
+logLevel: "INFO"
+security:
+  enabled: false
+  runAsUser: 1000
+  fsGroup: 1000
+
+## Select AntiAffinity as either hard or soft, default is hard
+antiAffinity: "hard"
+
+
+
