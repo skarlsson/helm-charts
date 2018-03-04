@@ -16,14 +16,18 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 {{/*
-Form the Kafka URL. If Kafka is installed as part of this chart, use k8s service discovery,
-else use user-provided URL
+Create a default fully qualified zookeeper name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
-{{- define "kafka-zookeeper.url" }}
-{{- $port := .Values.kafka.zookeeperPort | toString }}
-{{- if .Values.kafka.enabled -}}
-{{- printf "%s-zookeeper:%s" .Release.Name $port }}
-{{- else -}}
-{{- printf "%s:%s" .Values.kafka.zookeeperUrl $port }}
+{{- define "schema-registry.zookeeper.fullname" -}}
+{{- $name := default "zookeeper" .Values.zookeeper.nameOverride -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+Form the Zookeeper URL
+*/}}
+{{- define "zookeeper.url" }}
+{{- $port := .Values.zookeeper.port | toString }}
+{{- printf "%s:%s" (include "schema-registry.zookeeper.fullname" .) $port }}
 {{- end -}}

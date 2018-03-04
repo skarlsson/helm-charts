@@ -12,5 +12,5 @@ sources:
 - https://github.com/confluentinc/schema-registry
 - https://github.com/confluentinc/cp-docker-images
 maintainers:
-- name: benjigoldberg
-  email: ben@spothero.com
+- name: svante karlsson
+  email: svante.karlsson@csi.se

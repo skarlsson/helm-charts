@@ -1,0 +1,12 @@
+dependencies:
+- name: zookeeper
+  repository: https://raw.githubusercontent.com/bitbouncer/helm-charts-storage/master/
+  version: 0.4.3
+- name: kafka
+  repository: https://raw.githubusercontent.com/bitbouncer/helm-charts-storage/master/
+  version: 0.2.11
+- name: schema-registry
+  repository: https://raw.githubusercontent.com/bitbouncer/helm-charts-storage/master/
+  version: 0.1.0
+digest: sha256:d2955345c11f1ef1f3fca5ce8b5ce85dc00e9d97e71de91f5362f73221a12c05
+generated: 2018-02-06T13:56:01.167533094+01:00

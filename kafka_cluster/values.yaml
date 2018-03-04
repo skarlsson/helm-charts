@@ -4,7 +4,6 @@
 
 ## The StatefulSet installs 3 pods by default
 replicas: 3
-minAvailable: 2
 
 ## The kafka image repository
 image: "confluentinc/cp-kafka"
@@ -64,10 +63,6 @@ configurationOverrides: {}
 # ------------------------------------------------------------------------------
 
 zookeeper:
-  ## If true, install the Zookeeper chart alongside Kafka
-  ## ref: https://github.com/kubernetes/charts/tree/master/incubator/zookeeper
-  #enabled: true
-
   ## Configure Zookeeper resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   resources: {}
@@ -82,16 +77,14 @@ zookeeper:
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
   imagePullPolicy: "IfNotPresent"
 
-  ## If the Zookeeper Chart is disabled a URL and port are required to connect
-  #url: ""
-  port: 2181
+## If the Zookeeper Chart is disabled a URL and port are required to connect
+#  url: ""
+#  port: 2181
 
 # ------------------------------------------------------------------------------
 # Schema Registry:
 # ------------------------------------------------------------------------------
 
 ## Install Confluent Schema Registry server alongside Kafka to track Avro Schemas
-schema-registry:
-  ## If true, install the Schema-Registry chart alongside Kafka
-  ## ref: https://github.com/kubernetes/charts/tree/master/incubator/schema-registry
-  #enabled: true
+#schema-registry:
+

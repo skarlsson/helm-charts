@@ -39,10 +39,6 @@ spec:
               fieldRef:
                 fieldPath: metadata.name
           - name: SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL
-            value: {{ template "kafka-zookeeper.url" . }}/
-          {{ range $configName, $configValue := .Values.configurationOverrides }}
-          - name: SCHEMA_REGISTRY_{{ $configName | replace "." "_" | upper }}
-            value: {{ $configValue }}
-          {{ end }}
+            value: "{{ template "zookeeper.url" . }}"
           resources:
 {{ toYaml .Values.resources | indent 12 }}

@@ -12,7 +12,8 @@ imageTag: "4.0.0"
 imagePullPolicy: "IfNotPresent"
 
 ## Number of Schema Registry Pods to Deploy
-replicaCount: 1
+replicaCount: 2
+minAvailable: 1
 
 ## Schema Registry Settings Overrides
 ## Configuration Options can be found here: https://docs.confluent.io/current/schema-registry/docs/config.html
@@ -34,16 +35,19 @@ resources: {}
 ## The port on which the SchemaRegistry will be available and serving requests
 servicePort: 8081
 
+zookeeper:
+  port: 2181
+
 ## Kafka Settings
-kafka:
-  ## This is enabled only to allow installations of this chart without arguments
-  enabled: true
+#kafka:
+## This is enabled only to allow installations of this chart without arguments
+#  enabled: false
   ## Install only a single Kafka pod in the StatefulSet
-  Replicas: 1
+#  Replicas: 1
   ## Install only a single Zookeeper pod in the StatefulSet
-  zookeeper:
-    Servers: 1
+#  zookeeper:
+#    Servers: 1
   ## If `Kafka.Enabled` is `false`, the Zookeeper url servicing the Kafka cluster must be provided
-  zookeeperUrl: ""
-  ## If `Kafka.Enabled` is `false`, the Zookeeper port servicing the Kafka cluster must be provided
-  zookeeperPort: 2181
+#zookeeperUrl: ""
+## If `Kafka.Enabled` is `false`, the Zookeeper port servicing the Kafka cluster must be provided
+#zookeeperPort: 2181

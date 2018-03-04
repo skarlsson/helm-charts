@@ -23,7 +23,7 @@ spec:
         app: {{ include "kafka.name" . | quote }}
         release: {{ .Release.Name | quote }}
     spec:
-affinity:
+      affinity:
         podAntiAffinity:
         {{- if eq .Values.antiAffinity "hard" }}
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -71,15 +71,9 @@ affinity:
             fieldRef:
               fieldPath: status.podIP
         - name: KAFKA_ZOOKEEPER_CONNECT
-          valueFrom:
-            configMapKeyRef:
-              name: "{{ $configMapName }}"
-              key: zookeeper.connect
+          value: "{{ template "zookeeper.url" . }}"
         - name: KAFKA_LOG_DIRS
-          valueFrom:
-            configMapKeyRef:
-              name: "{{ $configMapName }}"
-              key: log.dirs
+          value: "{{ printf "%s/%s" .Values.dataDirectory .Values.logSubPath }}"
         {{- range $configName := (keys .Values.configurationOverrides) }}
         - name: KAFKA_{{ $configName | replace "." "_" | upper }}
           valueFrom:

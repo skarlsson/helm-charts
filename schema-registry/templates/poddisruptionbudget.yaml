@@ -1,0 +1,21 @@
+{{- if .Release.IsInstall -}}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ template "schema-registry.fullname" . }}
+  labels:
+    app: {{ include "schema-registry.name" . | quote }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "schema-registry.name" . | quote }}
+      release: {{ .Release.Name | quote }}
+  {{- if .Values.minAvailable }}
+  minAvailable: {{ .Values.minAvailable }}
+  {{- else }}
+  minAvailable: 1
+  {{- end }}
+{{- end -}}
